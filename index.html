@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Robust 3D Gaussian Splatting for Novel View Synthesis in Presence of Distractors">
+  <meta name="keywords" content="3D Gaussian Splatting, Robustness, Distractors">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Robust 3D Gaussian Splatting for Novel ViewSynthesis in Presence of Distractors</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Robust 3D Gaussian Splatting for Novel View Synthesis in Presence of Distractors</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Paul Ungermann<sup>1</sup>,</span>
+            <span class="author-block">
+              Armin Ettenhofer<sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://niessnerlab.org/members/matthias_niessner/profile.html">Matthias Niessner</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://niessnerlab.org/members/barbara_roessle/profile.html">Barbara Roessle</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Technical University of Munich</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ppaulee/Robust3DGaussians"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.JPG">
+      <h2 class="subtitle has-text-centered">
+        Due to distractors in the scene 3D Gaussian Splatting creates floating
+        artifacts in the image (highlighted with circles). Our method mitigates artifacts
+        due to violations of the static scene assumption for Gaussian Splatting. As a key
+        element to our approach, we optimize for semantic distractor masks simultaneous
+        to the scene optimization, which allow us to effectively ignore distractors.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D Gaussian Splatting has shown impressive novel view synthesis results; nonetheless, it is vulnerable 
+            to dynamic objects polluting the input data of an otherwise static scene, so called distractors. Distractors 
+            have severe impact on the rendering quality as they get represented as view-dependent effects or result in 
+            floating artifacts. Our goal is to identify and ignore such distractors during the 3D Gaussian optimization 
+            to obtain a clean reconstruction. To this end, we take a self-supervised approach that looks at the image residuals 
+            during the optimization to determine areas that have likely been falsified by a distractor. In addition, we leverage 
+            a pretrained segmentation network to provide object awareness, enabling more accurate exclusion of distractors. 
+            This way, we obtain segmentation masks of distractors to effectively ignore them in the loss formulation. 
+            We demonstrate that our approach is robust to various distractors and  significantly improves rendering quality 
+            on distractor-polluted scenes, improving PSNR by 1.86dB compared to 3D Gaussian Splatting. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="has-text-centered">
+        <h2 class="title is-3">Pipeline</h2></div>
+        <div>
+            <img src="./static/images/pipeline.JPG">
+        </div>
+        <p>
+          Robust 3D Gaussian Splatting computes semantic distractor masks to ignore distractors during optimization. 
+          Furthermore, it leverages SegmentAnything to provide object awareness for more accurate exclusion of distractors.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column">
+          <h2 class="title is-3" style="height:65px">Robust Gaussian Splatting (ours)</h2>
+          <div class="video-container">
+          <video autoplay controls muted loop playsinline>
+          <source src="./static/videos/crab_robust.mp4"
+                    type="video/mp4">
+          </video>
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/yoda_robust.mp4"
+                    type="video/mp4">
+          </video>
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/statue_robust.mp4"
+                    type="video/mp4">
+          </video>
+          </div>
+      </div>
+
+      <div class="column">
+        <h2 class="title is-3" style="height:65px">Gaussian Splatting</h2>
+        <div class="video-container">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/crab_normal.mp4"
+                      type="video/mp4">
+            </video>
+            <video autoplay controls muted loop playsinline>
+              <source src="./static/videos/yoda_normal.mp4"
+                      type="video/mp4">
+            </video>
+            <video autoplay controls muted loop playsinline>
+              <source src="./static/videos/statue_normal.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+    </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{ungermann2024robustgaussians,
+  author    = {Ungermann, Paul and Ettenhofer, Armin and Niessner, Matthias and Roessle, Barbara},
+  title     = {Robust 3D Gaussian Splatting for Novel ViewSynthesis in Presence of Distractors},
+  journal   = {GCPR},
+  year      = {2024},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website source code borrowed from <a href="https://keunhong.com/"> Keunhong Park</a>'s <a href="https://github.com/nerfies/nerfies.github.io">website</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
